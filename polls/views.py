@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from polls.forms import PollForm
@@ -36,3 +36,7 @@ def detail(request, poll_id):
 def results(request, poll_id):
     p = get_object_or_404(Poll.published.all(), pk=poll_id)
     return render_to_response('polls/results.html', {'poll': p})
+
+
+def error_view(request):
+    return HttpResponse("The result is {}".format(100/0))
